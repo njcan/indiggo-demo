@@ -12,14 +12,27 @@ export class SidebarComponent implements OnInit {
   constructor(private dataFetcher: DataFetcherService) { }
 
   ngOnInit() {
-    this.getNewPlanet();
+    this.getInitialPlanet();
+  }
+
+  getInitialPlanet() {
+    const pName = document.getElementById('planet-name');
+    const pColor = document.getElementById('planet-color');
+    const pRadius = document.getElementById('planet-radius');
+
+    this.dataFetcher.getFirstPlanet()
+      .subscribe(planet => {
+          pName.innerText = planet['name'];
+          pColor.innerText = planet['color'];
+          pRadius.innerText = planet['radius'];
+        }
+      );
   }
 
   getNewPlanet() {
-    let pName = document.getElementById('planet-name');
-    let pColor = document.getElementById('planet-color');
-    let pRadius = document.getElementById('planet-radius');
-
+    const pName = document.getElementById('planet-name');
+    const pColor = document.getElementById('planet-color');
+    const pRadius = document.getElementById('planet-radius');
 
     this.dataFetcher.getRandomPlanet()
       .subscribe(planet => {

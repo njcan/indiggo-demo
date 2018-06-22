@@ -48,8 +48,21 @@ const planets =  [
     radius: 1195
   }]
 
+var nums = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+var index = 2;
+
 function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
+
+  var rand = Math.floor((Math.random() * (nums.length - 1)) + 1);
+  var nextIndex = index + rand;
+
+  if(nextIndex >= max) {
+    index = nextIndex - max;
+    return index;
+  } else {
+    index = nextIndex;
+    return index;
+  }
 }
 
 app.use(cors());
