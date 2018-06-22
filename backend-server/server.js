@@ -9,12 +9,12 @@ const planets =  [
   },
   {
     name: 'Venus',
-    color: 'Red',
+    color: 'Green',
     radius: 6051
   },
   {
     name: 'Earth',
-    color: 'Red',
+    color: 'Blue',
     radius: 6378
   },
   {

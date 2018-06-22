@@ -8,10 +8,10 @@ import { Planet } from '../planet';
 })
 export class PlanetComponent implements OnInit {
   planet: Planet = {
-    orbitSpeed: -1,
-    spinSpeed:  -1,
+    orbitSpeed: 1,
+    spinSpeed:  1,
     name: 'name',
-    radius: -1,
+    radius: 5,
     color: 'color'
   };
   constructor() {}

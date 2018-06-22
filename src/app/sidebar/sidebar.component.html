@@ -5,14 +5,14 @@
     <div class="input-group-prepend">
       <span class="input-group-text" id="orbit-speed">Orbit Speed</span>
     </div>
-    <input [(ngModel)]="planet.orbitSpeed" type="text" class="form-control" placeholder="0-100" min="0" max="100" size="10">
+    <input type="text" class="form-control" placeholder="1.0" min="0" max="100" size="10">
   </div>
 
   <div class="input-group mb-3 d-flex justify-content-center">
     <div class="input-group-prepend">
       <span class="input-group-text" id="spin-speed">Spin&nbsp; Speed </span>
     </div>
-    <input type="text" class="form-control" placeholder="0-100" min="0" max="100" size="10">
+    <input type="text" class="form-control" placeholder="1.0" min="0" max="100" size="10">
   </div>
 
   <div class="btn-group">
@@ -24,7 +24,7 @@
         <button type="button" class="btn btn-secondary">Stop Orbit</button>
       </div>
       <div class="col-4">
-        <button type="button" class="btn btn-secondary">New Planet</button>
+        <button (click)="getNewPlanet()" type="button" class="btn btn-secondary">New Planet</button>
       </div>
     </div>
   </div>
@@ -32,9 +32,18 @@
   <div class="info-group">
     <h3 class="sidebar-heading">Planet Data</h3>
     <ul>
-      <li>Name:</li>
-      <li>Color:</li>
-      <li>Radius:</li>
+      <li>
+        <span>Name: </span>
+        <p id="planet-name"></p>
+      </li>
+      <li>
+        <span>Color: </span>
+        <p id="planet-color"></p>
+      </li>
+      <li>
+        <span>Radius: </span>
+        <p id="planet-radius"></p>
+      </li>
     </ul>
   </div>
   </fieldset>
