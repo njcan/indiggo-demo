@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Indiggo Coding Assessment - Simple Web Application';
+  title = 'Indiggo Coding Assessment';
   author = 'Nicholas Cantner';
 }

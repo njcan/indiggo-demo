@@ -1,7 +1,7 @@
 export class Planet {
-  orbitSpeed: 1;
-  spinSpeed:  1;
-  name: 'name';
-  radius: 5;
-  color: 'color';
+  public orbitSpeed: number;
+  public spinSpeed:  number;
+  public name: string;
+  public radius: string;
+  public color: string;
 }

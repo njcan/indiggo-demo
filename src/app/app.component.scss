@@ -1,3 +1,40 @@
-.intro {
-  text-align: center;
+body, main {
+  height: 100vh;
 }
+
+@keyframes spin {
+  from {
+    transform:rotate(0deg);
+  }
+  to {
+    transform:rotate(360deg);
+  }
+}
+
+.sun {
+  position:absolute;
+  left: 50%;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: yellow;
+}
+
+.planet {
+  position:absolute;
+  left: 25%;
+  top: 25%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: lightblue;
+  border-style: dashed;
+  border-color: darkviolet;
+  border-width: 3px;
+  animation-name: spin;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+

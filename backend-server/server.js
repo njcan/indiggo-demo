@@ -4,48 +4,48 @@ const app = express();
 const planets =  [
   {
     name: 'Mercury',
-    color: 'Red',
-    radius: 2439
+    color: 'Light Coral',
+    radius: 24
   },
   {
     name: 'Venus',
-    color: 'Green',
-    radius: 6051
+    color: 'Light Green',
+    radius: 60
   },
   {
     name: 'Earth',
-    color: 'Blue',
-    radius: 6378
+    color: 'Light Blue',
+    radius: 63
   },
   {
     name: 'Mars',
-    color: 'Red',
-    radius: 3396
+    color: 'Light Coral',
+    radius: 33
   },
   {
     name: 'Jupiter',
-    color: 'Orange',
-    radius: 71492
+    color: 'Light Salmon',
+    radius: 150
   },
   {
     name: 'Saturn',
-    color: 'Yellow',
-    radius: 60268
+    color: 'Light Salmon',
+    radius: 120
   },
   {
     name: 'Uranus',
     color: 'Light Blue',
-    radius: 25559
+    radius: 85
   },
   {
     name: 'Neptune',
-    color: 'Dark Blue',
-    radius: 24764
+    color: 'Light Blue',
+    radius: 81
   },
   {
     name: 'Pluto',
     color: 'Brown',
-    radius: 1195
+    radius: 15
   }]
 
 var nums = [0, 1, 2, 3, 4, 5, 6, 7, 8];

@@ -1,51 +1,48 @@
-<div class="sidebar-controls">
-  <fieldset>
-  <h3 class="sidebar-heading">Planet Controls</h3>
-  <div class="input-group mb-3 d-flex justify-content-center">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="orbit-speed">Orbit Speed</span>
-    </div>
-    <input type="text" class="form-control" placeholder="1.0" min="0" max="100" size="10">
-  </div>
+<nav class="d-none d-md-block bg-light sidebar">
+  <h3>Indiggo Coding Assessment</h3>
+  <h4>Nicholas Cantner</h4>
+  <div class="sidebar-sticky">
+    <h3 class="sidebar-heading">Planet Controls</h3>
 
-  <div class="input-group mb-3 d-flex justify-content-center">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="spin-speed">Spin&nbsp; Speed </span>
+    <div class="input-group mb-3 d-flex justify-content-center">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Orbit Speed</span>
+      </div>
+      <input id="orbit-speed" type="text" class="form-control" placeholder="1.0" min="0" max="1" size="10" value="0.01">
     </div>
-    <input type="text" class="form-control" placeholder="1.0" min="0" max="100" size="10">
-  </div>
 
-  <div class="btn-group">
-    <div class="row">
-      <div class="col-4">
-        <button type="button" class="btn btn-secondary">Start Orbit</button>
+    <div class="input-group mb-3 d-flex justify-content-center">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Spin&nbsp; Speed </span>
       </div>
-      <div class="col-4">
-        <button type="button" class="btn btn-secondary">Stop Orbit</button>
-      </div>
-      <div class="col-4">
-        <button (click)="getNewPlanet()" type="button" class="btn btn-secondary">New Planet</button>
-      </div>
+      <input id="spin-speed" type="text" class="form-control" placeholder="1.0" min="0" max="100" size="10" value="5">
+    </div>
+
+    <div class="btn-vertical">
+      <button (click)="startOrbit()" type="button" class="btn btn-secondary">Start Orbit</button>
+      <button (click)="stopOrbit()" type="button" class="btn btn-secondary">Stop Orbit</button>
+      <button (click)="getNewPlanet()" type="button" class="btn btn-secondary">New Planet</button>
+    </div>
+
+    <div class="info-group justify-content-center">
+      <h3 class="sidebar-heading">Planet Data</h3>
+
+      <ul class="text-center">
+        <li>
+          <span>Name: </span>
+          <p id="planet-name"></p>
+        </li>
+        <li>
+          <span>Color: </span>
+          <p id="planet-color"></p>
+        </li>
+        <li>
+          <span>Radius: </span>
+          <p id="planet-radius"></p>
+        </li>
+      </ul>
+
     </div>
   </div>
-
-  <div class="info-group">
-    <h3 class="sidebar-heading">Planet Data</h3>
-    <ul>
-      <li>
-        <span>Name: </span>
-        <p id="planet-name"></p>
-      </li>
-      <li>
-        <span>Color: </span>
-        <p id="planet-color"></p>
-      </li>
-      <li>
-        <span>Radius: </span>
-        <p id="planet-radius"></p>
-      </li>
-    </ul>
-  </div>
-  </fieldset>
-</div>
+</nav>
 
