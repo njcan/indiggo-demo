@@ -18,7 +18,10 @@ body, main {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: yellow;
+  background-color: gold;
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
 }
 
 .planet {
@@ -30,7 +33,7 @@ body, main {
   border-radius: 50%;
   background-color: lightblue;
   border-style: dashed;
-  border-color: darkviolet;
+  border-color: black;
   border-width: 3px;
   animation-name: spin;
   animation-duration: 1000ms;

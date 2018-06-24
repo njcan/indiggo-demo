@@ -14,48 +14,59 @@ export class SidebarComponent implements OnInit {
 
   constructor(private dataFetcher: DataFetcherService, private planetControls: PlanetService) { }
   private orbit;
+  private speed;
+  private radians;
+  private planet;
+  private planetName;
+  private planetRadius;
+  private planetColor;
+  private isOrbiting = false;
 
   ngOnInit() {
+    this.planet = document.getElementById('planet');
+    this.speed = document.getElementById('orbit-speed').value;
+    this.planetName = document.getElementById('planet-name');
+    this.planetRadius = document.getElementById('planet-radius');
+    this.planetColor = document.getElementById('planet-color');
+    this.isOrbiting =  false;
+    this.radians = 0;
+    this.startRotation();
     this.getInitialPlanet();
-    this.initializeRotation();
-    this.startOrbit();
+    this.startOrbit(.01);
   }
 
   getInitialPlanet() {
-    const pName = document.getElementById('planet-name');
-    const pColor = document.getElementById('planet-color');
-    const pRadius = document.getElementById('planet-radius');
-
     this.dataFetcher.getFirstPlanet()
       .subscribe(planet => {
-          pName.innerText = planet['name'];
-          pColor.innerText = planet['color'];
-          pRadius.innerText = planet['radius'];
+          this.planetName.innerText = planet['name'];
+          this.planetColor.innerText = planet['color'];
+          this.planetRadius.innerText = planet['radius'];
         }
       );
   }
 
   getNewPlanet() {
-    const pName = document.getElementById('planet-name');
-    const pColor = document.getElementById('planet-color');
-    const pRadius = document.getElementById('planet-radius');
-    const pDiv = document.getElementById('planet')
-
     this.dataFetcher.getRandomPlanet()
       .subscribe(planet => {
-          pName.innerText = planet['name'];
-          pColor.innerText = planet['color'];
-          pRadius.innerText = planet['radius'];
-          pDiv.style.backgroundColor = planet['color'].toLowerCase().replace(" ", "");
-          pDiv.style.height = planet['radius']+ 'px';
-          pDiv.style.width = planet['radius'] + 'px';
-
+          this.planetName.innerText = planet['name'];
+          this.planetColor.innerText = planet['color'];
+          this.planetRadius.innerText = planet['radius'];
+          this.planet.style.backgroundColor = planet['color'].toLowerCase().replace(" ", "");
+          this.planet.style.height = planet['radius']+ 'px';
+          this.planet.style.width = planet['radius'] + 'px';
         }
       );
   }
 
-  startOrbit() {
-    var planetCoords = document.getElementById('planet').getClientRects()[0];
+  startOrbit(speed: number) {
+
+    if(!this.isOrbiting) {
+      this.isOrbiting = true;
+    } else {
+      return;
+    }
+
+    var planetCoords = this.planet.getClientRects()[0];
     var sunCoords = document.getElementById('sun').getClientRects()[0];
 
     var sunX = sunCoords.left;
@@ -64,38 +75,67 @@ export class SidebarComponent implements OnInit {
     var planetX = planetCoords.left;
     var planetY = planetCoords.top;
 
-    var speed = Number(document.getElementById('orbit-speed').value);
-    var radians = 0;
     var distance = 300;
+
+    if(speed === null) {
+      speed = Number(this.speed);
+    } else {
+      speed = Number(speed);
+    }
 
     this.orbit = setInterval(doOneFrame, 10);
 
     function doOneFrame() {
-      if(radians < (Math.PI * 2)) {
-        radians = (radians + speed);
+      if(this.radians < (Math.PI * 2)) {
+        this.radians += speed;
       } else {
-        radians = 0;
+        this.radians = 0;
       }
-      updatePosition()
+      updatePosition(this)
     }
 
-    function updatePosition() {
-      var planet = document.getElementById('planet');
-      var xCoord = sunX + Math.cos(radians) * distance;
-      var yCoord = sunY + Math.sin(radians) * distance;
-
-      planet.style.left = xCoord + 'px';
-      planet.style.top = yCoord + 'px';
+    function updatePosition(self) {
+      var xCoord = sunX + Math.cos(self.radians) * distance;
+      var yCoord = sunY + Math.sin(self.radians) * distance;
+      self.planet.style.left = xCoord + 'px';
+      self.planet.style.top = yCoord + 'px';
     }
   }
 
   stopOrbit() {
-      clearInterval(this.orbit);
+    this.isOrbiting = false;
+    clearInterval(this.orbit);
   }
 
-  initializeRotation() {
+  startRotation() {
     var planet = document.getElementById('planet');
-    var spinSpeed = document.getElementById('spin-speed').value;
-    planet.style.animationDuration = (Number(spinSpeed) * 1000) + 'ms';
+    var speed = document.getElementById('spin-speed').value;
+    planet.style.animationDuration = (Number(speed) * 1000) + 'ms';
   }
+
+  updateRotationSpeed(value: number) {
+    var inputBox = document.getElementById('spin-speed');
+
+    if(isNaN(Number(value)) || Number(value) < 0) {
+      inputBox.style.border = '2px solid red';
+      this.planet.style.animationDuration = '0ms';
+
+    } else {
+      inputBox.style.border = '2px solid grey';
+      this.planet.style.animationDuration = (Number(value) * 1000) + 'ms';
+    }
+  }
+
+  updateOrbitSpeed(value: number) {
+    var inputBox = document.getElementById('orbit-speed');
+    this.speed = Number(value);
+    if(isNaN(Number(value))) {
+      inputBox.style.border = '2px solid red';
+      clearInterval(this.orbit);
+    } else {
+      clearInterval(this.orbit);
+      this.startOrbit(value)
+    }
+  }
+
 }
