@@ -84,8 +84,6 @@ export class SidebarComponent implements OnInit {
  */
   startOrbit(speed: number) {
 
-    console.log("before: " + speed);
-
     // If we are not orbiting..
     if(!this.isOrbiting) {
       this.isOrbiting = true; // Set orbiting to true
@@ -115,8 +113,6 @@ export class SidebarComponent implements OnInit {
     else {
       speed = Number(speed) / 1000;
     }
-
-    console.log("after: " + speed);
 
     // Orbiting animation control - process one frame 100 times a second for a smooth animation
     this.orbit = setInterval(doOneFrame, 10);
@@ -230,18 +226,24 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  /*
+    function: resize(event)
+    inputs: resize event
+    outputs: none
+    purpose: This function listens for a resize event and acts accordingly
+  */
   resize(event: any) {
-    //this.updatePlanetCoordinates();
     this.updateSunCoordinates();
     this.stopOrbit()
     setTimeout(this.startOrbit(null), 2000);
   }
 
-  updatePlanetCoordinates()  {
-    const planet = document.getElementById('planet');
-    planet.style.left = '25%';
-    planet.style.top = '25%';
-  }
+  /*
+    function: updateSunCoordiantes()
+    inputs: none
+    outputs: none
+    purpose: This function updates the sun's coordinates
+  */
   updateSunCoordinates() {
     const sun = document.getElementById('sun');
     sun.style.left = '60%';
