@@ -10,14 +10,14 @@
       <div class="input-group-prepend">
         <span class="input-group-text">Orbit Speed</span>
       </div>
-      <input (input)="updateOrbitSpeed($event.target.value)" id="orbit-speed" type="text" class="form-control" placeholder="5" min="0" max="15" size="10" value="5">
+      <input (input)="updateOrbitSpeed($event.target.value)" id="orbit-speed" type="text" class="form-control" placeholder="5" size="10" value="5">
     </div>
 
     <div class="input-group mb-3 d-flex justify-content-center">
       <div class="input-group-prepend">
         <span class="input-group-text">Spin&nbsp; Speed </span>
       </div>
-      <input (input)="updateRotationSpeed($event.target.value)" id="spin-speed" type="text" class="form-control" placeholder="1-5" min="0" max="100" size="10" value="5">
+      <input (input)="updateRotationSpeed($event.target.value)" id="spin-speed" type="text" class="form-control" placeholder="1-10" min="0" max="10" size="10" value="5">
     </div>
 
     <p *ngIf="spinError" id="error-orbit" class="warning">Invalid spin speed detected!</p>

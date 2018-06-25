@@ -181,17 +181,24 @@ export class SidebarComponent implements OnInit {
 
     // Declare variable that represent the input form
     var inputBox = document.getElementById('spin-speed');
+    var maxSpeed = 11;
 
     // If the value is not valid
-    if(isNaN(Number(value)) || Number(value) < 0 || String(value) === '') {
+    if(isNaN(Number(value)) || Number(value) < 0 || Number(value) > 10 || String(value) === '') {
       inputBox.style.border = '2px solid red'; // Change input box to red border
       this.planet.style.animationDuration = '0ms'; // Stop the animation
       this.spinError = true;
       // If the input is valid
     } else {
+
       inputBox.style.border = '2px solid silver'; // Update the input box to represent valid input
-      this.planet.style.animationDuration = (Number(value) * 1000) + 'ms'; // Update the animation to the new speed
-      this.spinError = false;
+      if(Number(value) !== 0) {
+        this.planet.style.animationDuration = ((maxSpeed - Number(value)) * 1000) + 'ms'; // Update the animation to the new speed
+        this.spinError = false;
+      } else {
+        this.planet.style.animationDuration = '0ms'; // Stop the animation as 0 is valid
+        this.spinError = false;
+      }
     }
   }
 
