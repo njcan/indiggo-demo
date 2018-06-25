@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DataFetcherService} from '../data-fetcher.service';
 import { PlanetService } from '../planet.service';
 import { Planet } from '../planet';
-import {applySourceSpanToExpressionIfNeeded} from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: 'app-sidebar',
@@ -26,7 +25,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.planet = document.getElementById('planet');
-    this.speed = document.getElementById('orbit-speed').value;
+    this.speed = (<HTMLInputElement>document.getElementById('orbit-speed')).value;
     this.planetName = document.getElementById('planet-name');
     this.planetRadius = document.getElementById('planet-radius');
     this.planetColor = document.getElementById('planet-color');
@@ -168,7 +167,7 @@ export class SidebarComponent implements OnInit {
     purpose: This function kicks off the planet rotation animation
   */
   startRotation() {
-    var speed = document.getElementById('spin-speed').value; // Get the initial value from the spin-speed input
+    var speed = (<HTMLInputElement>document.getElementById('spin-speed')).value; // Get the initial value from the spin-speed input
     this.planet.style.animationDuration = (Number(speed) * 1000) + 'ms'; // Update the animation duration
   }
 
