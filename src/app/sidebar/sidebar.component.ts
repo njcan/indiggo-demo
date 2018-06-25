@@ -13,6 +13,8 @@ import {applySourceSpanToExpressionIfNeeded} from "@angular/compiler/src/output/
 export class SidebarComponent implements OnInit {
 
   constructor(private dataFetcher: DataFetcherService, private planetControls: PlanetService) { }
+  spinError = false;
+  orbitError = false;
   private orbit;
   private speed;
   private radians;
@@ -24,7 +26,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.planet = document.getElementById('planet');
-    this.speed = document.getElementById('orbit-speed').value;
+    this.speed = document.getElementById('orbit-speed').value / 1000;
     this.planetName = document.getElementById('planet-name');
     this.planetRadius = document.getElementById('planet-radius');
     this.planetColor = document.getElementById('planet-color');
@@ -32,7 +34,7 @@ export class SidebarComponent implements OnInit {
     this.radians = 0;
     this.startRotation();
     this.getInitialPlanet();
-    this.startOrbit(.01);
+    this.startOrbit(5);
   }
 
   /*
@@ -102,13 +104,13 @@ export class SidebarComponent implements OnInit {
     var planetY = planetCoords.top;
 
     // Declare variables to hold the distance between the sun and planet
-    var distance = 300;
+    var distance = 150;
 
     // If speed is null from updating the orbit, look to the new value set
     if(speed === null) {
-      speed = Number(this.speed);
+      speed = Number(this.speed) / 1000;
     } else {
-      speed = Number(speed);
+      speed = Number(speed) / 1000;
     }
 
     // Orbiting animation control - process one frame 100 times a second for a smooth animation
@@ -184,11 +186,12 @@ export class SidebarComponent implements OnInit {
     if(isNaN(Number(value)) || Number(value) < 0 || String(value) === '') {
       inputBox.style.border = '2px solid red'; // Change input box to red border
       this.planet.style.animationDuration = '0ms'; // Stop the animation
-
+      this.spinError = true;
       // If the input is valid
     } else {
-      inputBox.style.border = '2px solid grey'; // Update the input box to represent valid input
+      inputBox.style.border = '2px solid silver'; // Update the input box to represent valid input
       this.planet.style.animationDuration = (Number(value) * 1000) + 'ms'; // Update the animation to the new speed
+      this.spinError = false;
     }
   }
 
@@ -202,6 +205,7 @@ export class SidebarComponent implements OnInit {
 
     // Declare variable for input form
     var inputBox = document.getElementById('orbit-speed');
+    var error = document.getElementById('error-orbit');
 
     // Coerce input to number
     this.speed = Number(value);
@@ -209,12 +213,32 @@ export class SidebarComponent implements OnInit {
     // If the value is blank or not a number
     if(isNaN(Number(value)) || String(value) === '') {
       inputBox.style.border = '2px solid red'; // Set input box to red
+      this.orbitError = true; // Update the class variable to turn on the directive
       this.stopOrbit(); // Stop the orbit
 
       // If the value is valid
     } else {
       this.stopOrbit(); // Stop the orbit
       this.startOrbit(value); // Restart the orbit with the new value
+      inputBox.style.border = '2px solid silver'; // Update the input box to represent valid input
+      this.orbitError = false; // Update the class variable to turn off the directive
     }
+  }
+
+  resize(event: any) {
+    this.updatePlanetCoordinates();
+    this.updateSunCoordinates();
+    this.stopOrbit()
+  }
+
+  updatePlanetCoordinates()  {
+    const planet = document.getElementById('planet');
+    planet.style.left = '25%';
+    planet.style.top = '25%';
+  }
+  updateSunCoordinates() {
+    const sun = document.getElementById('sun');
+    sun.style.left = '70%';
+    sun.style.top = '50%';
   }
 }

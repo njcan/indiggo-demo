@@ -25,12 +25,12 @@ const planets =  [
   {
     name: 'Jupiter',
     color: 'Light Salmon',
-    radius: 150
+    radius: 100
   },
   {
     name: 'Saturn',
     color: 'Light Salmon',
-    radius: 120
+    radius: 90
   },
   {
     name: 'Uranus',

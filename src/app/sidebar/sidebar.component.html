@@ -1,14 +1,16 @@
-<nav class="d-none d-md-block bg-light sidebar">
-  <h3>Indiggo Coding Assessment</h3>
-  <h4>Nicholas Cantner</h4>
-  <div class="sidebar-sticky">
+<nav (window:resize)="resize($event)" class="bg-light sidebar nav">
+  <div>
+    <button type="button" class="navbar-toggle btn collapsed" data-toggle="collapse" data-target="#sidebar">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+  <div id="sidebar" class="sidebar-sticky  navbar-collapse navbar-expand-md">
     <h3 class="sidebar-heading">Planet Controls</h3>
-
     <div class="input-group mb-3 d-flex justify-content-center">
       <div class="input-group-prepend">
         <span class="input-group-text">Orbit Speed</span>
       </div>
-      <input (input)="updateOrbitSpeed($event.target.value)" id="orbit-speed" type="text" class="form-control" placeholder="0-1" min="0" max="1" size="10" value="0.01">
+      <input (input)="updateOrbitSpeed($event.target.value)" id="orbit-speed" type="text" class="form-control" placeholder="5" min="0" max="15" size="10" value="5">
     </div>
 
     <div class="input-group mb-3 d-flex justify-content-center">
@@ -18,7 +20,8 @@
       <input (input)="updateRotationSpeed($event.target.value)" id="spin-speed" type="text" class="form-control" placeholder="1-5" min="0" max="100" size="10" value="5">
     </div>
 
-    <p id="error" class="warning"></p>
+    <p *ngIf="spinError" id="error-orbit" class="warning">Invalid spin speed detected!</p>
+    <p *ngIf="orbitError" id="error-spin" class="warning">Invalid orbit speed detected!</p>
 
     <div class="btn-vertical">
       <button (click)="startOrbit(null)" type="button" class="btn btn-secondary">Start Orbit</button>
@@ -28,8 +31,7 @@
 
     <div class="info-group justify-content-center">
       <h3 class="sidebar-heading">Planet Data</h3>
-
-      <ul class="text-center">
+      <ul>
         <li>
           <span>Name: </span>
           <p id="planet-name"></p>
@@ -43,8 +45,6 @@
           <p id="planet-radius"></p>
         </li>
       </ul>
-
     </div>
   </div>
 </nav>
-
