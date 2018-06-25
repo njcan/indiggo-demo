@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.planet = document.getElementById('planet');
-    this.speed = document.getElementById('orbit-speed').value / 1000;
+    this.speed = document.getElementById('orbit-speed').value;
     this.planetName = document.getElementById('planet-name');
     this.planetRadius = document.getElementById('planet-radius');
     this.planetColor = document.getElementById('planet-color');
@@ -84,6 +84,8 @@ export class SidebarComponent implements OnInit {
  */
   startOrbit(speed: number) {
 
+    console.log("before: " + speed);
+
     // If we are not orbiting..
     if(!this.isOrbiting) {
       this.isOrbiting = true; // Set orbiting to true
@@ -109,9 +111,12 @@ export class SidebarComponent implements OnInit {
     // If speed is null from updating the orbit, look to the new value set
     if(speed === null) {
       speed = Number(this.speed) / 1000;
-    } else {
+    }
+    else {
       speed = Number(speed) / 1000;
     }
+
+    console.log("after: " + speed);
 
     // Orbiting animation control - process one frame 100 times a second for a smooth animation
     this.orbit = setInterval(doOneFrame, 10);
@@ -226,9 +231,10 @@ export class SidebarComponent implements OnInit {
   }
 
   resize(event: any) {
-    this.updatePlanetCoordinates();
+    //this.updatePlanetCoordinates();
     this.updateSunCoordinates();
     this.stopOrbit()
+    setTimeout(this.startOrbit(null), 2000);
   }
 
   updatePlanetCoordinates()  {
@@ -238,7 +244,7 @@ export class SidebarComponent implements OnInit {
   }
   updateSunCoordinates() {
     const sun = document.getElementById('sun');
-    sun.style.left = '70%';
+    sun.style.left = '60%';
     sun.style.top = '50%';
   }
 }
